@@ -9,5 +9,40 @@ var model = {
     {name: 'Dizzy\'s Coca-Cola Club', location: {lat: 40.7685594, lng: -73.9830762}},
     {name: 'Smoke', location: {lat: 40.8011258, lng: -73.9681923}},
     {name: 'The Blue Note', location: {lat: 40.7308943, lng: -74.00070300000002}}
-  ]
+  ],
+
+  Club:  function(name, location){
+      this.name = name;
+      this.location = location;
+  },
+
+  "tmClubs" : [],
+  "sortList" : [],
+
+  fetchTmData : function() {
+    $.ajax({
+      type: "GET",
+      url: "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=Jazz&dmaId=345&apikey=pRZh7znoV9HKvcHqyjPS98Ftw4dYXF0J",
+      async: true,
+      dataType: "json",
+      success: function(json){
+        var robj = json._embedded.events;
+        robj.forEach(function(event) {
+          var r_name = event._embedded.venues[0].name
+          var r_location = event._embedded.venues[0].location;
+          var venue = {name: r_name, location: r_location};
+          results = $.inArray(r_name, model.sortList);
+          if (-1 === results){
+            model.tmClubs.push(venue);
+            model.sortList.push(r_name);
+          }
+        });
+      },
+      error: function(xhr, status, err) {
+        console.log(err);
+      }
+    });
+  },
 };
+
+model.fetchTmData();

@@ -43,4 +43,6 @@ var initMap = function(){
  };
 
   resetMarkers();
+
+
 };
