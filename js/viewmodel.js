@@ -1,8 +1,6 @@
 function ViewModel() {
     var self = this;
 
-    var noop = 1;
-
     self.clubs = model.usualClubs;
 
     self.clubList = ko.observableArray([]);
@@ -10,6 +8,8 @@ function ViewModel() {
     self.tmpList = [];
 
     self.filterString = ko.observable('');
+
+    self.btn1_on = ko.observable(true);
 
     self.showClubs = function(category) {
         self.clubList(self.clubs);
@@ -35,7 +35,14 @@ function ViewModel() {
     self.filterList = function(){
       self.clubList().forEach(self.filterClub);
       self.clubList(self.tmpList);
+      self.btn1_on(false);
       resetMarkers();
     };
 
+    self.resetAll = function() {
+      self.showClubs(self.clubs);
+      self.tmpList = [];
+      self.btn1_on(true);
+      resetMarkers();
+    }
 }
