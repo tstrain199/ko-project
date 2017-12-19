@@ -7,6 +7,19 @@
   </head>
 
   <body>
+  <form>
+    <p>Choose a source:</p>
+    <div>
+      <input type="radio" name="sourceGroup" value="default" data-bind="checked: source">
+      <label for="default">Default Clubs</label>
+
+      <input type="radio" name="sourceGroup" value="tm" data-bind="checked: source">
+      <label for="contactChoice2">TicketMaster</label>
+      <button data-bind="click: changeSource, enable: btn2_on">Go</button>
+    </div>
+
+    <hr></hr>
+  </form>
     <div><a href="#" data-bind="click: resetAll">Show All Clubs</a></div>
     <nav>
       <ul data-bind="foreach: clubList">

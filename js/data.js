@@ -29,8 +29,9 @@ var model = {
         var robj = json._embedded.events;
         robj.forEach(function(event) {
           var r_name = event._embedded.venues[0].name
-          var r_location = event._embedded.venues[0].location;
-          var venue = {name: r_name, location: r_location};
+          var r_location_lat = event._embedded.venues[0].location.latitude;
+          var r_location_lng = event._embedded.venues[0].location.longitude;
+          var venue = {name: r_name, location: {lat: parseFloat(r_location_lat), lng: parseFloat(r_location_lng)}};
           results = $.inArray(r_name, model.sortList);
           if (-1 === results){
             model.tmClubs.push(venue);
@@ -46,3 +47,4 @@ var model = {
 };
 
 model.fetchTmData();
+console.log(model.tmClubs);
