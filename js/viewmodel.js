@@ -14,7 +14,7 @@ function ViewModel() {
     self.btn1_on = ko.observable(true);
     self.btn2_on = ko.observable(true);
 
-    self.showClubs = function(category) {
+    self.showClubs = function() {
         self.clubList(self.clubs);
     };
 
@@ -44,12 +44,12 @@ function ViewModel() {
     self.changeSource = function() {
       self.resetAll();
       if (self.source() == "tm") {
-        this.clubList(model.tmClubs);
-        console.log("Source is: " + self.source());
+        self.clubs = model.tmClubs;
+        self.showClubs();
         resetMarkers();
       } else {
-        this.clubList(model.usualClubs);
-        console.log("Source is: " + self.source());
+        self.clubs = model.usualClubs;
+        self.showClubs();
         resetMarkers();
       };
     };
