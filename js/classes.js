@@ -17,6 +17,13 @@ var initMap = function(){
     });
     allMarkers.push(marker);
     }
+
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < allMarkers.length; i++) {
+      bounds.extend(allMarkers[i].getPosition());
+   }
+
+   map.fitBounds(bounds);
   };
 
   hideMarker = function(id){
