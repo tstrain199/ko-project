@@ -27,11 +27,16 @@ var model = {
       dataType: "json",
       success: function(json){
         var robj = json._embedded.events;
+        console.log(robj);
         robj.forEach(function(event) {
           var r_name = event._embedded.venues[0].name
           var r_location_lat = event._embedded.venues[0].location.latitude;
           var r_location_lng = event._embedded.venues[0].location.longitude;
-          var venue = {name: r_name, location: {lat: parseFloat(r_location_lat), lng: parseFloat(r_location_lng)}};
+          var r_image = event._embedded.venues[0].images[0].url;
+          var venue = {name: r_name,
+            location: {lat: parseFloat(r_location_lat), lng: parseFloat(r_location_lng)},
+            image: r_image
+          };
           results = $.inArray(r_name, model.sortList);
           if (-1 === results){
             model.tmClubs.push(venue);
@@ -47,4 +52,3 @@ var model = {
 };
 
 model.fetchTmData();
-console.log(model.tmClubs);

@@ -6,14 +6,20 @@ var initMap = function(){
 
   var allMarkers = [];
 
+  var infowindow = new google.maps.InfoWindow();
+
   resetMarkers = function() {
     deleteMarkers();
     for (var i = 0; i < viewModel.clubList().length; i++){
     var marker = new google.maps.Marker({
       position: viewModel.clubList()[i].location,
       title: viewModel.clubList()[i].name,
+      image: viewModel.clubList()[i].image,
       map: map,
       id: i
+    });
+    marker.addListener('click', function() {
+        createInfoWindow(this, infowindow);
     });
     allMarkers.push(marker);
     }
@@ -21,9 +27,9 @@ var initMap = function(){
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < allMarkers.length; i++) {
       bounds.extend(allMarkers[i].getPosition());
-   }
+    };
+    map.fitBounds(bounds);
 
-   map.fitBounds(bounds);
   };
 
   hideMarker = function(id){
@@ -47,6 +53,15 @@ var initMap = function(){
   deleteMarkers = function() {
    clearMarkers();
    allMarkers = [];
+ };
+
+//Taken from L17S7
+ createInfoWindow = function(marker, infowindow) {
+   infowindow.marker = marker;
+   infowindow.setContent('<div>' + marker.title + '</div>' +
+    '<div style="width:200px; height:150px; "><img src="' + marker.image + '"></div>');
+//   infowindow.setContent(content);
+   infowindow.open(map, marker);
  };
 
   resetMarkers();
