@@ -59,7 +59,8 @@ var initMap = function(){
  createInfoWindow = function(marker, infowindow) {
    infowindow.marker = marker;
    infowindow.setContent('<div>' + marker.title + '</div>' +
-    '<div style="width:200px; height:150px; "><img src="' + marker.image + '"></div>');
+  //  '<div style="width:200px; height:150px; "><img src="' + marker.image + '"></div>');
+    '<div style="width:200px; height:150px; "></div>');
 //   infowindow.setContent(content);
    infowindow.open(map, marker);
  };
