@@ -27,7 +27,7 @@ var model = {
       dataType: "json",
       success: function(json){
         var robj = json._embedded.events;
-        console.log(robj);
+        //console.log(robj);
         robj.forEach(function(event) {
           var r_name = event._embedded.venues[0].name
           var r_location_lat = event._embedded.venues[0].location.latitude;
@@ -49,6 +49,54 @@ var model = {
       }
     });
   },
+
+
+// https://stackoverflow.com/questions/8427012/foursquare-javascript-api
+//https://stackoverflow.com/questions/35026964/what-is-wrong-with-my-foursquare-api-call
+  fetch4sVenue : function(club) {
+    $.ajax({
+      url: 'https://api.foursquare.com/v2/venues/search',
+      dataType: 'json',
+      data:
+        'limit-1' +
+        '&client_id=XN55DS4DVJZQLSGGSZ3ZWM5HJYLDXMOD21LYJFU2R1DZWQWE' +
+        '&client_secret=MNMNXPO1W2BF5LNSWYIUJ0YAHXVSRHDI5SUSWHO0IAKDGXZY' +
+        '&ll=' + club.location.lat + ',' + club.location.lng +
+        '&query=' + club.name +
+        '&v=20170801' ,
+      async: true,
+      success: function (data) {
+        var id = data.response.venues[0].id;
+        model.fetch4sVenueInfo(id);
+        console.log(id);
+      },
+      error: function(xhr, status, err) {
+        console.log(err);
+      }
+
+    });
+  },
+
+  fetch4sVenueInfo : function(id) {
+    $.ajax({
+      url: 'https://api.foursquare.com/v2/venues/' + id,
+      dataType: 'json',
+      data:
+        'v=20170801' +
+        '&client_id=XN55DS4DVJZQLSGGSZ3ZWM5HJYLDXMOD21LYJFU2R1DZWQWE' +
+        '&client_secret=MNMNXPO1W2BF5LNSWYIUJ0YAHXVSRHDI5SUSWHO0IAKDGXZY' ,
+      async: true,
+      success: function (data) {
+        viewModel.buildInfowindow(data);
+      },
+      error: function(xhr, status, err) {
+        console.log(err);
+      }
+
+    });
+  }
 };
 
 model.fetchTmData();
+var vid = model.fetch4sVenue(model.usualClubs[4]);
+console.log(vid);
