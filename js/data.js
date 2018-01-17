@@ -32,10 +32,8 @@ var model = {
           var r_name = event._embedded.venues[0].name
           var r_location_lat = event._embedded.venues[0].location.latitude;
           var r_location_lng = event._embedded.venues[0].location.longitude;
-          var r_image = event._embedded.venues[0].images[0].url;
           var venue = {name: r_name,
             location: {lat: parseFloat(r_location_lat), lng: parseFloat(r_location_lng)},
-            image: r_image
           };
           results = $.inArray(r_name, model.sortList);
           if (-1 === results){
@@ -87,7 +85,7 @@ var model = {
         '&client_secret=MNMNXPO1W2BF5LNSWYIUJ0YAHXVSRHDI5SUSWHO0IAKDGXZY' ,
       async: true,
       success: function (data) {
-        viewModel.buildInfowindow(data);
+        viewModel.buildInfoWindow(data);
       },
       error: function(xhr, status, err) {
         console.log(err);

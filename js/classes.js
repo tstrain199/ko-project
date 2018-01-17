@@ -14,7 +14,7 @@ var initMap = function(){
     var marker = new google.maps.Marker({
       position: viewModel.clubList()[i].location,
       title: viewModel.clubList()[i].name,
-      image: viewModel.clubList()[i].image,
+  //    image: viewModel.clubList()[i].image,
       map: map,
       id: i
     });

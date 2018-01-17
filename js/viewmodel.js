@@ -53,4 +53,8 @@ function ViewModel() {
         resetMarkers();
       };
     };
+
+    self.buildInfoWindow = function(data) {
+      
+    }
 }
