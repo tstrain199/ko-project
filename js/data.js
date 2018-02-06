@@ -51,31 +51,35 @@ var model = {
 
 // https://stackoverflow.com/questions/8427012/foursquare-javascript-api
 //https://stackoverflow.com/questions/35026964/what-is-wrong-with-my-foursquare-api-call
-  fetch4sVenue : function(club) {
-    $.ajax({
-      url: 'https://api.foursquare.com/v2/venues/search',
-      dataType: 'json',
-      data:
-        'limit-1' +
-        '&client_id=XN55DS4DVJZQLSGGSZ3ZWM5HJYLDXMOD21LYJFU2R1DZWQWE' +
-        '&client_secret=MNMNXPO1W2BF5LNSWYIUJ0YAHXVSRHDI5SUSWHO0IAKDGXZY' +
-        '&ll=' + club.location.lat + ',' + club.location.lng +
-        '&query=' + club.name +
-        '&v=20170801' ,
-      async: true,
-      success: function (data) {
-        var id = data.response.venues[0].id;
-        model.fetch4sVenueInfo(id);
-        console.log(id);
-      },
-      error: function(xhr, status, err) {
-        console.log(err);
-      }
+  fetch4sVenueId : function(list, index) {
+      name = list[index].name;
+      lat = list[index].location.lat;
+      lng = list[index].location.lng;
+      $.ajax({
+        url: 'https://api.foursquare.com/v2/venues/search',
+        dataType: 'json',
+        data:
+          'limit-1' +
+          '&client_id=XN55DS4DVJZQLSGGSZ3ZWM5HJYLDXMOD21LYJFU2R1DZWQWE' +
+          '&client_secret=MNMNXPO1W2BF5LNSWYIUJ0YAHXVSRHDI5SUSWHO0IAKDGXZY' +
+          '&ll=' + lat + ',' + lng +
+          '&query=' + name +
+          '&v=20170801' ,
+        async: true,
+        success: function (data) {
+          var id = data.response.venues[0].id;
+          model.fetch4sVenueDetails(list, index, id);
+          console.log(id);
+        },
+        error: function(xhr, status, err) {
+          console.log(err);
+        }
 
-    });
+      });
+    })
   },
 
-  fetch4sVenueInfo : function(id) {
+  fetch4sVenueDetails : function(list, index, id) {
     $.ajax({
       url: 'https://api.foursquare.com/v2/venues/' + id,
       dataType: 'json',
@@ -85,16 +89,32 @@ var model = {
         '&client_secret=MNMNXPO1W2BF5LNSWYIUJ0YAHXVSRHDI5SUSWHO0IAKDGXZY' ,
       async: true,
       success: function (data) {
-        viewModel.buildInfoWindow(data);
+        model.appendDetails(list, index, data);
       },
       error: function(xhr, status, err) {
         console.log(err);
       }
 
     });
+  },
+
+  appendDetails : function(list, index, data) {
+    imgUrlPre = data.response.venue.photos.groups.items[1].prefix;
+    imgUrlPost = data.response.venue.photos.groups.items[1].suffix;
+    phone = data.response.venue.contact.formattedPhone;
+    list[index].phone = phone;
+    list.[index].image = imgUrlPre + '300x300' + imgUrlPost;
+  },
+
+  updateList : function(list) {
+    for (i = 0; i < list.length; i++) {
+      model.fetch4sVenueId(list, i);
+    }
   }
 };
 
+
 model.fetchTmData();
-var vid = model.fetch4sVenue(model.usualClubs[4]);
-console.log(vid);
+
+// var vid = model.fetch4sVenueId(model.usualClubs[4]);
+// console.log(vid);
