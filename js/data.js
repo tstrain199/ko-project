@@ -41,6 +41,7 @@ var model = {
             model.sortList.push(r_name);
           }
         });
+        model.updateList(model.tmClubs);
       },
       error: function(xhr, status, err) {
         console.log(err);
@@ -53,6 +54,7 @@ var model = {
 //https://stackoverflow.com/questions/35026964/what-is-wrong-with-my-foursquare-api-call
   fetch4sVenueId : function(list, index) {
       name = list[index].name;
+      console.log(name);
       lat = list[index].location.lat;
       lng = list[index].location.lng;
       $.ajax({
@@ -114,9 +116,11 @@ var model = {
   }
 };
 
-
+//console.log(model.usualClubs)
 model.fetchTmData();
 model.updateList(model.usualClubs);
 
+
 // var vid = model.fetch4sVenueId(model.usualClubs[4]);
  //console.log(model.usualClubs);
+ console.log(model.tmClubs);
