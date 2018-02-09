@@ -69,15 +69,14 @@ var model = {
         success: function (data) {
           var id = data.response.venues[0].id;
           model.fetch4sVenueDetails(list, index, id);
-          console.log(id);
+          //console.log(id);
         },
         error: function(xhr, status, err) {
           console.log(err);
         }
 
       });
-    })
-  },
+    },
 
   fetch4sVenueDetails : function(list, index, id) {
     $.ajax({
@@ -88,7 +87,8 @@ var model = {
         '&client_id=XN55DS4DVJZQLSGGSZ3ZWM5HJYLDXMOD21LYJFU2R1DZWQWE' +
         '&client_secret=MNMNXPO1W2BF5LNSWYIUJ0YAHXVSRHDI5SUSWHO0IAKDGXZY' ,
       async: true,
-      success: function (data) {
+      success: function(data) {
+        //console.log(data);
         model.appendDetails(list, index, data);
       },
       error: function(xhr, status, err) {
@@ -99,11 +99,12 @@ var model = {
   },
 
   appendDetails : function(list, index, data) {
-    imgUrlPre = data.response.venue.photos.groups.items[1].prefix;
-    imgUrlPost = data.response.venue.photos.groups.items[1].suffix;
+    //console.log(data.response.venue.photos.groups[0].items[1].prefix);
+    imgUrlPre = data.response.venue.photos.groups[0].items[1].prefix;
+    imgUrlPost = data.response.venue.photos.groups[0].items[1].suffix;
     phone = data.response.venue.contact.formattedPhone;
     list[index].phone = phone;
-    list.[index].image = imgUrlPre + '300x300' + imgUrlPost;
+    list[index].image = imgUrlPre + '300x300' + imgUrlPost;
   },
 
   updateList : function(list) {
@@ -115,6 +116,7 @@ var model = {
 
 
 model.fetchTmData();
+model.updateList(model.usualClubs);
 
 // var vid = model.fetch4sVenueId(model.usualClubs[4]);
-// console.log(vid);
+ //console.log(model.usualClubs);
