@@ -9,12 +9,13 @@ var initMap = function(){
   var infowindow = new google.maps.InfoWindow();
 
   resetMarkers = function() {
+    //console.log(viewModel.clubList());
     deleteMarkers();
     for (var i = 0; i < viewModel.clubList().length; i++){
-    var marker = new google.maps.Marker({
+      //console.log(image);
+      var marker = new google.maps.Marker({
       position: viewModel.clubList()[i].location,
       title: viewModel.clubList()[i].name,
-  //    image: viewModel.clubList()[i].image,
       map: map,
       id: i
     });
@@ -58,10 +59,11 @@ var initMap = function(){
 //Taken from L17S7
  createInfoWindow = function(marker, infowindow) {
    infowindow.marker = marker;
+   //console.log(marker);
    infowindow.setContent('<div>' + marker.title + '</div>' +
-  //  '<div style="width:200px; height:150px; "><img src="' + marker.image + '"></div>');
-    '<div style="width:200px; height:150px; "></div>');
-//   infowindow.setContent(content);
+    '<div style="width:200px; height:150px; "><img src="' + image + '"></div>' +
+    '<div style="width:200px; height:150px; ">' + phone + '</div>');
+   //infowindow.setContent(content);
    infowindow.open(map, marker);
  };
 
