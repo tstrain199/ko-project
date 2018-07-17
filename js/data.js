@@ -41,7 +41,7 @@ var model = {
             model.sortList.push(r_name);
           }
         });
-        model.updateList(model.tmClubs);
+        //model.updateList(model.tmClubs);
       },
       error: function(xhr, status, err) {
         console.log(err);
@@ -52,11 +52,11 @@ var model = {
 
 // https://stackoverflow.com/questions/8427012/foursquare-javascript-api
 //https://stackoverflow.com/questions/35026964/what-is-wrong-with-my-foursquare-api-call
-  fetch4sVenueId : function(list, index) {
-      name = list[index].name;
-      // console.log(name);
-      lat = list[index].location.lat;
-      lng = list[index].location.lng;
+  fetch4sVenueId : function(location1, name1) {
+      name = name1;
+      console.log(location1);
+      lat = location1.lat;
+      lng = location1.lng;
       $.ajax({
         url: 'https://api.foursquare.com/v2/venues/search',
         dataType: 'json',
@@ -70,7 +70,7 @@ var model = {
         async: true,
         success: function (data) {
           var id = data.response.venues[0].id;
-          model.fetch4sVenueDetails(list, index, id);
+          model.fetch4sVenueDetails(id);
           //console.log(id);
         },
         error: function(xhr, status, err) {
@@ -80,7 +80,7 @@ var model = {
       });
     },
 
-  fetch4sVenueDetails : function(list, index, id) {
+  fetch4sVenueDetails : function(id) {
     $.ajax({
       url: 'https://api.foursquare.com/v2/venues/' + id,
       dataType: 'json',
@@ -91,7 +91,8 @@ var model = {
       async: true,
       success: function(data) {
         //console.log(data);
-        model.appendDetails(list, index, data);
+      //  model.appendDetails(list, index, data);
+         createInfoWindow(data)
       },
       error: function(xhr, status, err) {
         console.log(err);
@@ -102,8 +103,8 @@ var model = {
 
   appendDetails : function(list, index, data) {
     //console.log(data.response.venue.photos.groups[0].items[1].prefix);
-    imgUrlPre = data.response.venue.photos.groups[0].items[1].prefix;
-    imgUrlPost = data.response.venue.photos.groups[0].items[1].suffix;
+    imgUrlPre = data.response.venue.photos.groups[0].items[0].prefix;
+    imgUrlPost = data.response.venue.photos.groups[0].items[0].suffix;
     phone = data.response.venue.contact.formattedPhone;
     list[index].phone = phone;
     list[index].image = imgUrlPre + '300x300' + imgUrlPost;
@@ -118,7 +119,7 @@ var model = {
 
 //console.log(model.usualClubs)
 model.fetchTmData();
-model.updateList(model.usualClubs);
+// model.updateList(model.usualClubs);
 
 
 
