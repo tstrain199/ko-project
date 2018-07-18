@@ -9,24 +9,23 @@ var initMap = function(){
   var infowindow = new google.maps.InfoWindow();
 
   resetMarkers = function() {
-    //console.log(viewModel.clubList());
     deleteMarkers();
     for (var i = 0; i < viewModel.clubList().length; i++){
-      //console.log(image);
       location1 = viewModel.clubList()[i].location;
-      //console.log(location1);
       name1 = viewModel.clubList()[i].name;
-      var marker = new google.maps.Marker({
-      position: location1,
-      title: name1,
-      map: map,
-      id: i
-    });
-    marker.addListener('click', function() {
-        model.fetch4sVenueId(location1, name1, marker);
-    });
-    allMarkers.push(marker);
-    }
+      (function(location1, name1){
+        var marker = new google.maps.Marker({
+        position: location1,
+        title: name1,
+        map: map,
+        id: i
+        });
+        marker.addListener('click', function() {
+            model.fetch4sVenueId(location1, name1, marker);
+        });
+        allMarkers.push(marker);
+      })(location1, name1);
+      }
 
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < allMarkers.length; i++) {
