@@ -14,7 +14,7 @@ var initMap = function(){
     for (var i = 0; i < viewModel.clubList().length; i++){
       //console.log(image);
       location1 = viewModel.clubList()[i].location;
-      console.log(location1);
+      //console.log(location1);
       name1 = viewModel.clubList()[i].name;
       var marker = new google.maps.Marker({
       position: location1,
@@ -23,7 +23,7 @@ var initMap = function(){
       id: i
     });
     marker.addListener('click', function() {
-        model.fetch4sVenueId(location1, name1, infowindow);
+        model.fetch4sVenueId(location1, name1, marker);
     });
     allMarkers.push(marker);
     }
@@ -60,10 +60,11 @@ var initMap = function(){
  };
 
 //Taken from L17S7
- createInfoWindow = function(data) {
+ createInfoWindow = function(data, marker) {
    console.log(data);
    imgUrlPre = data.response.venue.photos.groups[0].items[0].prefix;
    imgUrlPost = data.response.venue.photos.groups[0].items[0].suffix;
+   image = imgUrlPre + '300x300' + imgUrlPost;
    phone = data.response.venue.contact.formattedPhone;
    infowindow.marker = marker;
    infowindow.setContent('<div>' + marker.title + '</div>' +

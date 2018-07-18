@@ -52,7 +52,7 @@ var model = {
 
 // https://stackoverflow.com/questions/8427012/foursquare-javascript-api
 //https://stackoverflow.com/questions/35026964/what-is-wrong-with-my-foursquare-api-call
-  fetch4sVenueId : function(location1, name1) {
+  fetch4sVenueId : function(location1, name1, marker) {
       name = name1;
       console.log(location1);
       lat = location1.lat;
@@ -70,7 +70,7 @@ var model = {
         async: true,
         success: function (data) {
           var id = data.response.venues[0].id;
-          model.fetch4sVenueDetails(id);
+          model.fetch4sVenueDetails(id, marker);
           //console.log(id);
         },
         error: function(xhr, status, err) {
@@ -80,7 +80,7 @@ var model = {
       });
     },
 
-  fetch4sVenueDetails : function(id) {
+  fetch4sVenueDetails : function(id, marker) {
     $.ajax({
       url: 'https://api.foursquare.com/v2/venues/' + id,
       dataType: 'json',
@@ -92,7 +92,7 @@ var model = {
       success: function(data) {
         //console.log(data);
       //  model.appendDetails(list, index, data);
-         createInfoWindow(data)
+         createInfoWindow(data, marker)
       },
       error: function(xhr, status, err) {
         console.log(err);

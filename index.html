@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.0/dist/mini-default.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body>
@@ -23,8 +24,7 @@
     <div><a href="#" data-bind="click: resetAll">Show All Clubs</a></div>
     <nav>
       <ul data-bind="foreach: clubList">
-        <li><a href="#" data-bind="text: name, click: $parent.removeClub"></a></li>
-        </li>
+        <li><h6><a href="#" data-bind="text: name, click: $parent.removeClub"></a></h6></li>
       </ul>
     </nav>
     <div id="filterBox">
