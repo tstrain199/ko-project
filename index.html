@@ -2,38 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.0/dist/mini-default.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bulma.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body>
-  <form>
-    <p>Choose a source:</p>
-    <div>
-      <input type="radio" name="sourceGroup" value="default" data-bind="checked: source">
-      <label for="default">Default Clubs</label>
+    <div class="container">
+      <form>
+        <p>Choose a source:</p>
+        <div>
+          <input type="radio" name="sourceGroup" value="default" data-bind="checked: source">
+          <label for="default">Default Clubs</label>
 
-      <input type="radio" name="sourceGroup" value="tm" data-bind="checked: source">
-      <label for="contactChoice2">TicketMaster</label>
-      <button data-bind="click: changeSource, enable: btn2_on">Go</button>
+          <input type="radio" name="sourceGroup" value="tm" data-bind="checked: source">
+          <label for="contactChoice2">TicketMaster</label>
+          <button class="button is-success" data-bind="click: changeSource, enable: btn2_on">Go</button>
+        </div>
+
+        <hr></hr>
+      </form>
+        <div><a href="#" data-bind="click: resetAll">Show All Clubs</a></div>
+          <nav>
+            <ul data-bind="foreach: clubList">
+              <li><a href="#" data-bind="text: name, click: $parent.removeClub"></a></li>
+            </ul>
+          </nav>
+        <div id="filterBox">
+          <p>Filter: <input class="input is-info" data-bind="textInput: filterString" />
+          <button class="button is-success" data-bind="click: filterList, enable: btn1_on">Go</button></p>
+        </div>
     </div>
-
-    <hr></hr>
-  </form>
-    <div><a href="#" data-bind="click: resetAll">Show All Clubs</a></div>
-    <nav>
-      <ul data-bind="foreach: clubList">
-        <li><h6><a href="#" data-bind="text: name, click: $parent.removeClub"></a></h6></li>
-      </ul>
-    </nav>
-    <div id="filterBox">
-      <p>Filter: <input data-bind="textInput: filterString" />
-        <button data-bind="click: filterList, enable: btn1_on">Go</button></p>
-    </div>
-
     <div id="map" class="map_area"></div>
-
     <script type='text/javascript' src='js/jquery.js'></script>
     <script type='text/javascript' src='js/knockout-3.4.2.js'></script>
     <script type='text/javascript' src='js/data.js'></script>

@@ -54,7 +54,7 @@ var model = {
 //https://stackoverflow.com/questions/35026964/what-is-wrong-with-my-foursquare-api-call
   fetch4sVenueId : function(location1, name1, marker) {
       name = name1;
-      console.log(location1);
+      // console.log(location1);
       lat = location1.lat;
       lng = location1.lng;
       $.ajax({

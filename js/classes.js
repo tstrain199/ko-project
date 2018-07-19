@@ -60,7 +60,7 @@ var initMap = function(){
 
 //Taken from L17S7
  createInfoWindow = function(data, marker) {
-   console.log(data);
+   // console.log(data);
    imgUrlPre = data.response.venue.photos.groups[0].items[0].prefix;
    imgUrlPost = data.response.venue.photos.groups[0].items[0].suffix;
    image = imgUrlPre + '300x300' + imgUrlPost;
