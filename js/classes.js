@@ -67,8 +67,8 @@ var initMap = function(){
    phone = data.response.venue.contact.formattedPhone;
    infowindow.marker = marker;
    infowindow.setContent('<div>' + marker.title + '</div>' +
-    '<div style="width:200px; height:150px; "><img src="' + image + '"></div>' +
-    '<div style="width:200px; height:150px; ">' + phone + '</div>');
+    '<div>' + phone + '</div>' +
+    '<div style="width:200px; height:310px; "> <img src="' + image + '"></div>');
    //infowindow.setContent(content);
    infowindow.open(map, marker);
  };
