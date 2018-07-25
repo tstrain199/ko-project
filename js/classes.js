@@ -63,6 +63,10 @@ var initMap = function(){
 //Taken from L17S7
  createInfoWindow = function(data, marker) {
    // console.log(data);
+   marker.setAnimation(google.maps.Animation.BOUNCE);
+   window.setTimeout(function() {
+     marker.setAnimation(null);
+   }, 2000);
    imgUrlPre = data.response.venue.photos.groups[0].items[0].prefix;
    imgUrlPost = data.response.venue.photos.groups[0].items[0].suffix;
    image = imgUrlPre + '300x300' + imgUrlPost;
@@ -76,12 +80,12 @@ var initMap = function(){
  };
 
  listInfoWindow = function(data){
-  // console.log(data.name);
-  let marker1 = allMarkers.filter(marker => marker.title == data.name);
-  console.log(marker1[0]);
-  model.fetch4sVenueId(data.location, data.name, marker1[0]);
+   let marker1 = allMarkers.filter(marker => marker.title == data.name);
+   console.log(marker1[0]);
+   model.fetch4sVenueId(data.location, data.name, marker1[0]);
  }
-  resetMarkers();
+
+resetMarkers();
 
 
 };
