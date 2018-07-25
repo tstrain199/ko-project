@@ -75,6 +75,12 @@ var initMap = function(){
    infowindow.open(map, marker);
  };
 
+ listInfoWindow = function(data){
+  // console.log(data.name);
+  let marker1 = allMarkers.filter(marker => marker.title == data.name);
+  console.log(marker1[0]);
+  model.fetch4sVenueId(data.location, data.name, marker1[0]);
+ }
   resetMarkers();
 
 

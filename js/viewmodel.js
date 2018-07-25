@@ -55,6 +55,6 @@ function ViewModel() {
     };
 
     self.buildInfoWindow = function(data) {
-      
+      listInfoWindow(data);
     }
 }
