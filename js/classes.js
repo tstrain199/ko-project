@@ -1,4 +1,6 @@
 var initMap = function(){
+
+  $('#map_area').height($('#body').height());
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.750568, lng: -73.993519},
     zoom: 12
