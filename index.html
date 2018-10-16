@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+
     <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/mobi-plugin-flexbox/dist/mobi-plugin-flexbox.min.css" />
+    <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
@@ -26,13 +27,13 @@
     <div><a href="#" data-bind="click: resetAll">Show All Clubs</a></div>
       <div class="scroll-view" style="height:100px;">
       <ul style="list-style-type: none;" data-bind="foreach: clubList">
-        <li><a href="#"  data-bind="text: name, click: $parent.buildInfoWindow"></a></li>
+        <li><a href="#"  style="color:black;" data-bind="text: name, click: $parent.buildInfoWindow"></a></li>
         </li>
       </ul>
     </div>
     <div id="filterBox">
-      <p>Filter: <input data-bind="textInput: filterString" />
-        <button data-bind="click: filterList, enable: btn1_on">Go</button></p>
+      <input data-bind="textInput: filterString" />
+        <button data-bind="click: filterList, enable: btn1_on">Filter</button></p>
     </div>
     <div id="map" class="map_area"></div>
   </div>

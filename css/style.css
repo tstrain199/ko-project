@@ -6,3 +6,15 @@
     margin: 0;
     padding: 0;
   }
+
+li {
+  color: black;
+}
+
+ul li {
+    margin: 5px;
+}
+
+body {
+    background-color: #DA2934;
+}
