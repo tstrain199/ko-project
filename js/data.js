@@ -90,7 +90,7 @@ var model = {
         '&client_secret=MNMNXPO1W2BF5LNSWYIUJ0YAHXVSRHDI5SUSWHO0IAKDGXZY' ,
       async: true,
       success: function(data) {
-        //console.log(data);
+       //  console.log(data);
       //  model.appendDetails(list, index, data);
          createInfoWindow(data, marker)
       },

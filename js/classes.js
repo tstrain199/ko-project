@@ -67,8 +67,8 @@ var initMap = function(){
    window.setTimeout(function() {
      marker.setAnimation(null);
    }, 2000);
-   imgUrlPre = data.response.venue.photos.groups[0].items[0].prefix;
-   imgUrlPost = data.response.venue.photos.groups[0].items[0].suffix;
+   imgUrlPre = data.response.venue.photos.groups[1].items[0].prefix;
+   imgUrlPost = data.response.venue.photos.groups[1].items[0].suffix;
    image = imgUrlPre + '300x300' + imgUrlPost;
    phone = data.response.venue.contact.formattedPhone;
    infowindow.marker = marker;
