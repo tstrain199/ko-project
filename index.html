@@ -4,50 +4,64 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/mobi-plugin-flexbox/dist/mobi-plugin-flexbox.min.css" />
     <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
+    <nav id="menu">
+      <header>
+        <h2>Menu</h2>
+        <form>
+          <p>Choose a source:</p>
+          <div>
+            <input type="radio" name="sourceGroup" value="default" data-bind="checked: source">
+            <label for="default">Default Clubs</label>
+            <input type="radio" name="sourceGroup" value="tm" data-bind="checked: source">
+            <label for="contactChoice2">TicketMaster</label>
+            <button data-bind="click: changeSource, enable: btn2_on">Go</button>
+          </div>
+          <hr></hr>
+        </form>
+        <div><a href="#" data-bind="click: resetAll">Show All Clubs</a></div>
+          <div>
+            <ul style="list-style-type: none;" data-bind="foreach: clubList">
+              <li><a href="#"  style="color:black;" data-bind="text: name, click: $parent.buildInfoWindow"></a></li>
+              </li>
+            </ul>
+          </div>
+          <div id="filterBox">
+            <input data-bind="textInput: filterString" />
+              <button data-bind="click: filterList, enable: btn1_on">Filter</button></p>
+          </div>
+        </header>
+    </nav>
+      <main id="panel">
+        <button class="toggle-button">☰</button>
+        <div id="map" class="map_area"></div>
 
-  <form>
-    <p>Choose a source:</p>
-    <div>
-      <input type="radio" name="sourceGroup" value="default" data-bind="checked: source">
-      <label for="default">Default Clubs</label>
-
-      <input type="radio" name="sourceGroup" value="tm" data-bind="checked: source">
-      <label for="contactChoice2">TicketMaster</label>
-      <button data-bind="click: changeSource, enable: btn2_on">Go</button>
-    </div>
-
-    <hr></hr>
-  </form>
-    <div><a href="#" data-bind="click: resetAll">Show All Clubs</a></div>
-      <div class="scroll-view" style="height:100px;">
-      <ul style="list-style-type: none;" data-bind="foreach: clubList">
-        <li><a href="#"  style="color:black;" data-bind="text: name, click: $parent.buildInfoWindow"></a></li>
-        </li>
-      </ul>
-    </div>
-    <div id="filterBox">
-      <input data-bind="textInput: filterString" />
-        <button data-bind="click: filterList, enable: btn1_on">Filter</button></p>
-    </div>
-    <div id="map" class="map_area"></div>
-  </div>
-    <script type='text/javascript' src='js/jquery.js'></script>
-    <script type='text/javascript' src='js/knockout-3.4.2.js'></script>
-    <script type='text/javascript' src='js/data.js'></script>
-    <script src="js/viewmodel.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9J8hskzcIDdAS6E-ISNkPkld49q7ds_c&callback=initMap"
-    async defer></script>
-    <script src="js/classes.js"></script>
-    <script>
-        var viewModel = new ViewModel();
-        ko.applyBindings(viewModel);
-    </script>
-  </div>
-</body>
+        <script type='text/javascript' src='js/jquery.js'></script>
+        <script type='text/javascript' src='js/knockout-3.4.2.js'></script>
+        <script type='text/javascript' src='js/data.js'></script>
+        <script src="js/viewmodel.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9J8hskzcIDdAS6E-ISNkPkld49q7ds_c&callback=initMap"
+        async defer></script>
+        <script src="js/classes.js"></script>
+        <script>
+            var viewModel = new ViewModel();
+            ko.applyBindings(viewModel);
+        </script>
+      </main>
+      <script src="js/slideout.min.js"></script>
+      <script>
+        var slideout = new Slideout({
+          'panel': document.getElementById('panel'),
+          'menu': document.getElementById('menu'),
+          'padding': 256,
+          'tolerance': 70
+        });
+        document.querySelector('.toggle-button').addEventListener('click', function() {
+        slideout.toggle();
+      });
+      </script>
+  </body>
 </html>
